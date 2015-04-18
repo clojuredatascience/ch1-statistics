@@ -1,4 +1,4 @@
-(ns ch1.data
+(ns cljds.ch1.data
   (:require [incanter
              [core :refer [conj-rows $where rename-cols add-derived-column]]
              [excel :refer [read-xls]]]))

@@ -1,7 +1,7 @@
-(ns ch1.core
+(ns cljds.ch1.core
   (:require [clojure.tools.cli :refer [parse-opts]]
             [clojure.string :as s]
-            [ch1.examples :refer :all]))
+            [cljds.ch1.examples :refer :all]))
 
 (defn parse-example [e]
   (when-let [matches (re-matches #"(\d+)\.(\d+)" e)]
@@ -10,7 +10,7 @@
          (s/join "-")
          (str "ex-")
          (symbol)
-         (ns-resolve 'ch1.examples))))
+         (ns-resolve 'cljds.ch1.examples))))
 
 (def cli-options
   [["-e" "--example NUMBER" "The example to run"

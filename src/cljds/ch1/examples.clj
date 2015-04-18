@@ -1,6 +1,6 @@
-(ns ch1.examples
-  (:require [ch1.data :refer [uk-data clean-uk-data derive-uk-data filter-victor-constituencies ru-data rename-ru-cols derive-ru-data]]
-            [ch1.stats :refer [mean median quantile bin pmf standard-deviation]]
+(ns cljds.ch1.examples
+  (:require [cljds.ch1.data :refer [uk-data clean-uk-data derive-uk-data filter-victor-constituencies ru-data rename-ru-cols derive-ru-data]]
+            [cljds.ch1.stats :refer [mean median quantile bin pmf standard-deviation]]
             [incanter.core :refer [$ col-names view query-dataset to-map $where $rollup add-derived-column]]
             [incanter.distributions :refer [draw normal-distribution]]
             [incanter.charts :refer [histogram qq-plot xy-plot add-lines scatter-plot set-alpha]]
@@ -234,9 +234,9 @@
         (view))))
 
 (defn ex-1-33 []
-  (let data (->> (uk-data)
-                 (clean-uk-data)
-                 (derive-uk-data))
+  (let [data (->> (uk-data)
+                  (clean-uk-data)
+                  (derive-uk-data))]
     (-> (scatter-plot ($ "Turnout" data)
                       ($ "Victors Share" data)
                       :x-label "Turnout"

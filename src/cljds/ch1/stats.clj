@@ -1,4 +1,4 @@
-(ns ch1.stats)
+(ns cljds.ch1.stats)
 
 (defn mean [as]
   (let [n (count as)]
