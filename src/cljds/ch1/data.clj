@@ -1,10 +1,13 @@
 (ns cljds.ch1.data
   (:require [incanter
              [core :refer [conj-rows $where rename-cols add-derived-column]]
-             [excel :refer [read-xls]]]))
+             [excel :refer [read-xls]]]
+            [clojure.java.io :as io]))
 
 (defn uk-data []
-  (read-xls "http://www.complex-systems.meduniwien.ac.at/elections/ElectionData/UK2010.xls"))
+  (-> (io/resource "UK2010.xls")
+      (str)
+      (read-xls)))
 
 (defn clean-uk-data [data]
   ($where {"Election Year" {:$ne nil}} data))
@@ -20,9 +23,8 @@
        (add-derived-column "Turnout" ["Votes" "Electorate"] /)))
 
 (defn ru-data []
-  (let [dir (str (System/getProperty "user.dir") "/data/Russia2011")]
-    (conj-rows (read-xls (str dir "/Russia2011_1of2.xls"))
-               (read-xls (str dir "/Russia2011_2of2.xls")))))
+  (conj-rows (read-xls (str (io/resource "Russia2011_1of2.xls")))
+             (read-xls (str (io/resource "Russia2011_2of2.xls")))))
 
 (defn rename-ru-cols [data]
   (rename-cols
