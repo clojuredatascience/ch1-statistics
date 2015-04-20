@@ -46,9 +46,10 @@
 
 (defn variance [xs]
   (let [m (mean xs)
+        n (count xs)
         square-error (fn [x]
                        (Math/pow (- x m) 2))]
-    (mean (map square-error xs))))
+    (/ (reduce + (map square-error xs)) n)))
 
 (defn standard-deviation [xs]
   (Math/sqrt (variance xs)))

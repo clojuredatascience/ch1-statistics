@@ -1,13 +1,16 @@
 (ns cljds.ch1.examples
   (:require [cljds.ch1.data :refer [uk-data clean-uk-data derive-uk-data filter-victor-constituencies ru-data rename-ru-cols derive-ru-data]]
             [cljds.ch1.stats :refer [mean median quantile bin pmf standard-deviation]]
-            [incanter.core :refer [$ col-names view query-dataset to-map $where $rollup add-derived-column]]
-            [incanter.distributions :refer [draw normal-distribution]]
-            [incanter.charts :refer [histogram qq-plot xy-plot add-lines scatter-plot set-alpha]]
+            [incanter.core :refer [$ col-names view query-dataset to-map $where $rollup add-derived-column] :as i]
+            [incanter.distributions :as d :refer [draw normal-distribution]]
+            [incanter.charts :refer [histogram qq-plot xy-plot add-lines scatter-plot set-alpha] :as c]
             [incanter.stats :as s :refer [skewness cdf-empirical cdf-normal]]))
 
 (defn ex-1-1 []
   (col-names (uk-data)))
+
+(defn ex-1-1-1 []
+  (i/view (uk-data)))
 
 (defn ex-1-2 []
   ($ "Election Year" (uk-data)))
@@ -55,8 +58,8 @@
 
 (defn ex-1-11 []
   (-> (uk-electorate)
-      histogram
-      view))
+      (c/histogram :nbins 20)
+      (i/view)))
 
 (defn ex-1-12 []
   (-> (uk-electorate)
@@ -85,24 +88,24 @@
          (view))))
 
 (defn honest-baker []
-  (let [distribution (normal-distribution 1000 30)]
-    (repeatedly #(draw distribution))))
+  (let [distribution (d/normal-distribution 1000 30)]
+    (repeatedly #(d/draw distribution))))
 
 (defn ex-1-16 []
   (-> (take 10000 (honest-baker))
-      (histogram :nbins 25)
-      (view)))
+      (c/histogram :nbins 25)
+      (i/view)))
 
 (defn dishonest-baker []
-  (let [distribution (normal-distribution 950 30)]
-    (->> (repeatedly #(draw distribution))
+  (let [distribution (d/normal-distribution 950 30)]
+    (->> (repeatedly #(d/draw distribution))
          (partition 13)
          (map (partial apply max)))))
 
 (defn ex-1-17 []
   (-> (take 10000 (dishonest-baker))
-      (histogram :nbins 25)
-      (view)))
+      (c/histogram :nbins 25)
+      (i/view)))
 
 (defn ex-1-18 []
   (let [weights (take 10000 (dishonest-baker))]

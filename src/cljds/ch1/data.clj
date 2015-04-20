@@ -1,13 +1,13 @@
 (ns cljds.ch1.data
   (:require [incanter
              [core :refer [conj-rows $where rename-cols add-derived-column]]
-             [excel :refer [read-xls]]]
+             [excel :refer [read-xls] :as xls]]
             [clojure.java.io :as io]))
 
 (defn uk-data []
   (-> (io/resource "UK2010.xls")
       (str)
-      (read-xls)))
+      (xls/read-xls)))
 
 (defn clean-uk-data [data]
   ($where {"Election Year" {:$ne nil}} data))
