@@ -23,6 +23,7 @@
 
 (defn ratio->grayscale [f]
   (-> f
+      (Math/sqrt)
       (* 255)
       (int)
       (min 255)
@@ -34,6 +35,9 @@
                 (q/color 0 255 255) ;; turquoise
                 (q/color 0 255 0)   ;; green
                 (q/color 255 255 0) ;; yellow
+                (q/color 255 0 0)
+                (q/color 255 0 0)
+                (q/color 255 0 0)
                 (q/color 255 0 0)]  ;; red
         f (-> f
               (max 0.000)
