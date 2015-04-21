@@ -72,10 +72,16 @@
   (let [data (->> (uk-data)
                   (clean-uk-data)
                   (derive-uk-data))]
+    (histogram-2d ($ "Turnout" data) ($ "Victors Share" data) 5)))
+
+(defn draw-uk-histogram-2d []
+  (let [data (->> (uk-data)
+                  (clean-uk-data)
+                  (derive-uk-data))]
     (draw-histogram-2d ($ "Turnout" data) ($ "Victors Share" data)
                        {:n-bins 50 :size [250 250]})))
 
-(defn uk-heatmap-2d []
+(defn draw-uk-heatmap-2d []
   (let [data (->> (uk-data)
                   (clean-uk-data)
                   (derive-uk-data))]
