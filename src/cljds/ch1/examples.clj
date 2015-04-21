@@ -1,6 +1,7 @@
 (ns cljds.ch1.examples
   (:require [cljds.ch1.data :refer [uk-data clean-uk-data derive-uk-data filter-victor-constituencies ru-data rename-ru-cols derive-ru-data]]
             [cljds.ch1.stats :refer [mean median quantile bin pmf standard-deviation]]
+            [cljds.ch1.heatmap :refer [ru-heatmap-2d]]
             [incanter.core :refer [$ col-names view query-dataset to-map $where $rollup add-derived-column] :as i]
             [incanter.distributions :as d :refer [draw normal-distribution]]
             [incanter.charts :refer [histogram qq-plot xy-plot add-lines scatter-plot set-alpha] :as c]
@@ -266,3 +267,6 @@
                       :y-label "Victor's Share")
         (set-alpha 0.005)
         (view))))
+
+(defn ex-1-36 []
+  (ru-heatmap-2d))

@@ -46,6 +46,10 @@
               (* (dec (count colors))))]
     (q/lerp-color (nth colors f) (nth colors (inc f)) (rem f 1))))
 
+(defn histogram-2d [xs ys n-bins]
+  (-> (map vector (bin n-bins xs) (bin n-bins ys))
+      (frequencies)))
+
 (defn draw-histogram-2d [xs ys {:keys [n-bins size fill-fn]
                                 :or {fill-fn ratio->grayscale}}]
   (let [data (histogram-2d xs ys n-bins)
@@ -63,10 +67,6 @@
                     (q/rect x-pos y-pos  x-scale y-scale)))
                 (q/save "/tmp/heatmap.png"))]
     (q/sketch :setup setup :size size)))
-
-(defn histogram-2d [xs ys n-bins]
-  (-> (map vector (bin n-bins xs) (bin n-bins ys))
-      (frequencies)))
 
 (defn uk-histogram-2d []
   (let [data (->> (uk-data)

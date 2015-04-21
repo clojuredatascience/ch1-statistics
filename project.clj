@@ -7,7 +7,7 @@
                  [incanter/incanter "1.5.5"]
                  [org.clojure/math.numeric-tower "0.0.4"]
                  [org.clojure/tools.cli "0.3.1"]
-                 [quil "2.2.5"]]
+                 [quil "2.2.5" :exclusions [org.clojure/clojure]]]
   :aot [cljds.ch1.core]
   :main cljds.ch1.core
   :jvm-opts ["-Xmx2G"])
