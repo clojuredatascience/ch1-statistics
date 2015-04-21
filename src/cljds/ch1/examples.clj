@@ -8,7 +8,7 @@
             [incanter.stats :as s :refer [skewness cdf-empirical cdf-normal]]))
 
 (defn ex-1-1 []
-  (col-names (uk-data)))
+  (i/col-names (uk-data)))
 
 (defn ex-1-1-1 []
   (i/view (uk-data)))
