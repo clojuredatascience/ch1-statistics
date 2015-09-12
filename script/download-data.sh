@@ -17,7 +17,7 @@ fi
 echo "Downloading ${ru_url}..."
 if [ $(curl -s --head -w %{http_code} $ru_url -o /dev/null) -eq 200 ]; then
     curl -o "${data_dir}/Russia2011.zip" $ru_url
-    tar xzf "${data_dir}/Russia2011.zip" --directory "${data_dir}"
+    unzip "${data_dir}/Russia2011.zip" -d "${data_dir}"
 else
     echo "Couldn't download Russia data. Perhaps it has moved? Consult http://wiki.clojuredatascience.com"
 fi
