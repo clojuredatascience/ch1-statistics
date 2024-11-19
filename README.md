@@ -1,6 +1,6 @@
 # Introduction
 
-Example code for chapter one, [Clojure for Data Science](https://www.packtpub.com/big-data-and-business-intelligence/clojure-data-science).
+Example code for chapter one, [Clojure for Data Science](https://www.packtpub.com/en-gb/product/clojure-for-data-science-9781784397500).
 
 ## Data
 
